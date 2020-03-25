@@ -16,12 +16,13 @@ eureka:
   instance:
     prefer-ip-address: true
     leaseRenewalIntervalInSeconds: 10 #定期心跳
+    health-check-url-path: /actuator/health
   client:
     enabled: true
     healthcheck:
       enabled: true
     registerWithEureka: true
-    fetchRegistry: false
+    fetchRegistry: true
     serviceUrl:
       defaultZone: http://fire:huo@registrationcenter.fire.com:8761/eureka
   server:
@@ -36,3 +37,12 @@ logging:
   file:
     name: /opt/fire/registration-center/logs/log.log
     path: /opt/fire/registration-center/logs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
